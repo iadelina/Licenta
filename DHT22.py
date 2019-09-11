@@ -1,3 +1,4 @@
+#! /usr/bin/python3
 import Adafruit_DHT as dht
 from time import sleep
 #Set DATA pin
