@@ -19,7 +19,7 @@ def callback(channel):
  
 # infinite loop
 adc = ADS1115()
-channel = 0
+#channel = 0
 gain = 1
 t = 0
 #1015 is 12 bits, 1115 is 16 bits; adapt!
