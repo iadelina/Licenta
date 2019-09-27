@@ -2,8 +2,8 @@
 
 import RPi.GPIO as GPIO
 from time import sleep
-GPIO.setmode(GPIO.BCM)
-BUZZ=14
+GPIO.setmode(GPIO.BOARD)
+BUZZ=8
 GPIO.setup(BUZZ, GPIO.OUT)
 i=0
 
