@@ -27,10 +27,17 @@ while (time.time() - start) <= 100.0:
     print('Channel 1: {} '.format(value_for_duty_cycle))
     print('RAW: {}'.format(raw))
     if value_for_duty_cycle >= MIN_TRESHOLD_LIGHTINING:
-        pwm_led.ChangeDutyCycle(50) #to scale between 0-100
+        pwm_led.ChangeDutyCycle(20) #to scale between 0-100
         print('Duty Cycle changed!')
     else:
         pwm_led.ChangeDutyCycle(0)
-    time.sleep(0.5)
+   # time.sleep(2)
+   # pwm_led.ChangeDutyCycle(40)
+   # time.sleep(2)
+   # pwm_led.ChangeDutyCycle(70)
+   # time.sleep(2)
+   # pwm_led.ChangeDutyCycle(100)
+    time.sleep(2)
+
 adc.stop_adc()
 pwm_led.stop()
