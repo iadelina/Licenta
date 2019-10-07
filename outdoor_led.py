@@ -23,14 +23,17 @@ print('Reading ADS1x15 channel 1 for 5 seconds...')
 start = time.time()
 while (time.time() - start) <= 100.0:
     raw = adc.get_last_result()
-    value_for_duty_cycle = raw//int(256)
+    value_for_duty_cycle = ((raw//int(256) - int(MIN_TRESHOLD_LIGHTINING))*int(100))/(int(MIN_TRESHOLD_LIGHTINING) + int(MAX_TRESHOLD_LIGHTINING))
     print('Channel 1: {} '.format(value_for_duty_cycle))
     print('RAW: {}'.format(raw))
     if value_for_duty_cycle >= MIN_TRESHOLD_LIGHTINING:
-        pwm_led.ChangeDutyCycle(20) #to scale between 0-100
+        pwm_led.ChangeDutyCycle(value_for_duty_cycle) #to scale between 0-100
         print('Duty Cycle changed!')
     else:
-        pwm_led.ChangeDutyCycle(0)
+        if value_for_duty_cycle >= int(100):
+            pwm_led.ChangeDutyCycle(100)
+        else:
+            pwm_led.ChangeDutyCycle(0)
    # time.sleep(2)
    # pwm_led.ChangeDutyCycle(40)
    # time.sleep(2)
