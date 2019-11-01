@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html lang="en"> <head>
+{% extends "registration/base.html" %}
     {% block head %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,22 +9,26 @@
     <header>
         <div class="container">
                 <ul class="ul">
-                    <li class="li"><a href="#"><font face="Euphemia">DESPRE</font></a></li>
+                    <li class="li"><a href="{% url 'interface:index'"><font face="Euphemia">DESPRE</font></a></li>
  		    <li class="li"><span class="isDisabled"><a href="#"><font face="Euphemia">INFO</font></a></span></li>
 		    <li class="li" id="index"><a href="#"><font face="Euphemia">CONTROL</font></a></li>
 		</ul>
         </div>
     </header>
-    {% endblock %} </head> <body class="body">
-    
-    <div class="container">
+    {% endblock %}
  	{% block content %}
-	<div class="h2">
-        <h2><font face="Euphemia">AUTENTIFICARE</font></h2>
+    <div class="h2">
+        <h2><font face="Euphemia">ACASA</font></h2>
+        {% if user.is_authenticated %}
+           Bun venit {{ user.username  }}!
+           
+        {% else %}
+        <p>Nu sunteti autentificat</p>
+        <a href="{% url 'login' %}">Autentificare</a>
+        {% endif %} 
     </div>
     <div class="container containerMainButtons">
         	
     </div>
- 	{% endblock %}
-    </div> </body>
-</html>
+        
+	{% endblock %}

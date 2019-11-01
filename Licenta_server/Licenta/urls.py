@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 #import debug_toolbar
 from django.conf.urls import url, include
+from django.views.generic.base import TemplateView
 #from rest_framework import routers
 from interface import views
 #router = routers.SimpleRouter() router.register(r'api/rfs/tests', 
@@ -26,7 +27,8 @@ urlpatterns = [
     #url(r'^', include(router.urls)),
  #   url(r'^__debug__/', include(debug_toolbar.urls)),
     path('interface/', include('interface.urls', namespace='index')),
-    path('', include('interface.urls')),
+    path('',include('interface.urls')),
+    path('',TemplateView.as_view(template_name='home.html'), name='home'),
     #path('adv_search/', include('rfs_tests.urls', 
     #namespace='adv_search')), path('NA/', include('rfs_tests.urls', 
     #namespace='NA'))

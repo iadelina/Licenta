@@ -56,7 +56,8 @@ ROOT_URLCONF = 'Licenta.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates/interface'],
+        'DIRS': [ os.path.join(BASE_DIR,'templates')],
+#'templates/registration'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,3 +122,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.dirname(BASE_DIR) + '/static/'
+LOGIN_REDIRECT_URL='home'
+#LOGOUT_REDIRECT_URL='home'
