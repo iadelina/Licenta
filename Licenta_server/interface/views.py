@@ -7,4 +7,4 @@ def index(request):
    # context = {
    #     'num_tests': num_tests,
    # }
-    return render(request, 'interface/base.html')
+    return render(request, 'interface/login.html')
