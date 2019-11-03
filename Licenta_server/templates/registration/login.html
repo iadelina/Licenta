@@ -25,7 +25,8 @@
     <div class="h2">
         <form method="post">
           {% csrf_token %}
-           {{ form.as_p }}
+           <label for="{{ form.username.id_for_label }}">Utilizator:</label> {{ form.username }} <br>
+           <label for="{{ form.password.id_for_label }}">Parola:</label> {{ form.password }} <br>
 	<button type="submit"> Autentificare</button>
         </form>
     </div>

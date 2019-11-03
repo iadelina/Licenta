@@ -17,6 +17,26 @@
 
 .li {
     float: left;
+    posititon: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.li.popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;    
+}
+
+.li.popuptext::after {
+    content: "";
+    border-color: #555 transparent transparent transparent;
+}
+
+.li.show {
+    visibility: visible;
 }
 
 .li a {

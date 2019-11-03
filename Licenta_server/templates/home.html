@@ -1,27 +1,35 @@
-{% extends "registration/base.html" %}
+{% extends 'base.html' %}
     {% block head %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=100%, initial-scale=1">
     <meta name="description" content="Controlul Locuintei">
     <link href="/static/css/style.css" rel="stylesheet">
-    <title>Controlul Locuintei{% block title %}{% endblock %}</title>
+    <title>Controlul Locuintei{% block title %}{% endblock %}</title> 
+    
     <header>
         <div class="container">
                 <ul class="ul">
-                    <li class="li"><a href="{% url 'interface:index'"><font face="Euphemia">DESPRE</font></a></li>
- 		    <li class="li"><span class="isDisabled"><a href="#"><font face="Euphemia">INFO</font></a></span></li>
-		    <li class="li" id="index"><a href="#"><font face="Euphemia">CONTROL</font></a></li>
+                        {% if user.is_authenticated %}
+                            <li class="li"><a href="{% url 'home' %}"><font face="Euphemia">DESPRE</font></a></li>
+                            <li class="li"><a href="#">INFO</a></li>
+                            <li class="li"><a href="#">CONTROL</a></li>
+                            {% else %}
+                            <li class="li" onclick="myPopup()"><a href="{% url 'home' %}"><fonta face="Euphemia">DESPRE</font></a><span class="popuptext" id="myPopup">Va rugam sa va autentificati</span></li>
+ 		            <li class="li"><span class="isDisabled"><a href="#"><font face="Euphemia">INFO</font></a></span></li>
+		            <li class="li" id="index"><a href="#"><font face="Euphemia">CONTROL</font></a></li>
+                        {% endif %} 
 		</ul>
         </div>
     </header>
     {% endblock %}
  	{% block content %}
     <div class="h2">
-        <h2><font face="Euphemia">ACASA</font></h2>
+        <h2><font face="Euphemia">DESPRE</font></h2>
         {% if user.is_authenticated %}
            Bun venit {{ user.username  }}!
-           
+        <p>Aceasta aplicatie este dezvoltata in cadrul lucrarii de licenta si serveste ca interfata pentru controlul locuintei.</p>
+        <p><a href="{% url 'logout' %}">Deconectare</a></p>   
         {% else %}
         <p>Nu sunteti autentificat</p>
         <a href="{% url 'login' %}">Autentificare</a>
@@ -32,3 +40,8 @@
     </div>
         
 	{% endblock %}
+<script> function myPopup() {
+               var popup = document.getElementById("myPopup");
+               popup.classList.toggle("show");
+             }
+    </script>
