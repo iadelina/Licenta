@@ -15,9 +15,9 @@
                             <li class="li"><a href="#">INFO</a></li>
                             <li class="li"><a href="#">CONTROL</a></li>
                             {% else %}
-                            <li class="li" onclick="myPopup()"><a href="{% url 'home' %}"><fonta face="Euphemia">DESPRE</font></a><span class="popuptext" id="myPopup">Va rugam sa va autentificati</span></li>
- 		            <li class="li"><span class="isDisabled"><a href="#"><font face="Euphemia">INFO</font></a></span></li>
-		            <li class="li" id="index"><a href="#"><font face="Euphemia">CONTROL</font></a></li>
+                            <li class="li" ><a href="{% url 'home' %}"><fonta face="Euphemia">DESPRE</font></a></li>
+ 		            <li class="li"><span class="isDisabled"><a href="{% url 'home' %}"><font face="Euphemia">INFO</font></a></span></li>
+		            <li class="li" id="index"><a href="{% url 'home' %}"><font face="Euphemia">CONTROL</font></a></li>
                         {% endif %} 
 		</ul>
         </div>
@@ -25,23 +25,18 @@
     {% endblock %}
  	{% block content %}
     <div class="h2">
-        <h2><font face="Euphemia">DESPRE</font></h2>
         {% if user.is_authenticated %}
-           Bun venit {{ user.username  }}!
-        <p>Aceasta aplicatie este dezvoltata in cadrul lucrarii de licenta si serveste ca interfata pentru controlul locuintei.</p>
-        <p><a href="{% url 'logout' %}">Deconectare</a></p>   
+          <h2> Bun venit {{ user.username  }}!</h2>
+          <p>Aceasta aplicatie este dezvoltata in cadrul lucrarii de licenta si serveste ca interfata pentru controlul locuintei.</p>
+          <p><a href="{% url 'logout' %}">Deconectare</a></p>   
         {% else %}
-        <p>Nu sunteti autentificat</p>
-        <a href="{% url 'login' %}">Autentificare</a>
+          <h2><font face="Euphemnia">Informatii indisponibile</font></h2>
+          <p>Nu sunteti autentificat</p>
+          <a href="{% url 'login' %}">Autentificare</a>
         {% endif %} 
     </div>
     <div class="container containerMainButtons">
         	
-    </div>
-        
+    </div>     
 	{% endblock %}
-<script> function myPopup() {
-               var popup = document.getElementById("myPopup");
-               popup.classList.toggle("show");
-             }
-    </script>
+
