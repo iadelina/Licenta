@@ -12,7 +12,7 @@
                 <ul class="ul">
                         {% if user.is_authenticated %}
                             <li class="li"><a href="{% url 'home' %}"><font face="Euphemia">DESPRE</font></a></li>
-                            <li class="li"><a href="#">INFO</a></li>
+                           # <li class="li"><a href="{% url 'interface:render_info_page' %}">INFO</a></li>
                             <li class="li"><a href="#">CONTROL</a></li>
                             {% else %}
                             <li class="li" ><a href="{% url 'home' %}"><fonta face="Euphemia">DESPRE</font></a></li>

@@ -28,6 +28,7 @@ urlpatterns = [
  #   url(r'^__debug__/', include(debug_toolbar.urls)),
     path('interface/', include('django.contrib.auth.urls')),
     path('interface/',include('interface.urls')),
+    path('interface/', include('interface.urls', namespace='render_info_page')),
     path('',TemplateView.as_view(template_name='home.html'), name='home'),
     #path('adv_search/', include('rfs_tests.urls', 
     #namespace='adv_search')), path('NA/', include('rfs_tests.urls', 
