@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Licenta',
-    'interface'
-]
+    'interface',
+ ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -124,3 +124,21 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.dirname(BASE_DIR) + '/static/'
 LOGIN_REDIRECT_URL='home'
 LOGOUT_REDIRECT_URL='home'
+
+# For RabbitMQ
+#BROKER_URL = 'amqp://[127.0.0.1]'
+#CELERY_RESULT_BACKEND = 'amqp://[127.0.0.1]'
+
+# Celery Data Format
+#CELERY_ACCEPT_CONTENT = ['application/json']
+#CELERY_TASK_SERIALIZER = 'json'
+#CELERY_RESULT_SERIALIZER = 'json'
+#CELERY_TIMEZONE = 'Europe/Bucharest'
+
+#SMTP
+#EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_HOST_USER='username'
+#EMAIL_HOST_PASSWORD='password'
+#EMAIL_PORT = 587
+#EMAIL_USE_TLS=True
+
