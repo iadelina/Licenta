@@ -125,15 +125,18 @@ STATIC_ROOT = os.path.dirname(BASE_DIR) + '/static/'
 LOGIN_REDIRECT_URL='home'
 LOGOUT_REDIRECT_URL='home'
 
-# For RabbitMQ
-#BROKER_URL = 'amqp://[127.0.0.1]'
-#CELERY_RESULT_BACKEND = 'amqp://[127.0.0.1]'
+#For RabbitMQ
+BROKER_URL = 'amqp://guest:guest@localhost:5672//'
+CELERY_RESULT_BACKEND = 'amqp'
+
 
 # Celery Data Format
-#CELERY_ACCEPT_CONTENT = ['application/json']
-#CELERY_TASK_SERIALIZER = 'json'
-#CELERY_RESULT_SERIALIZER = 'json'
-#CELERY_TIMEZONE = 'Europe/Bucharest'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_IGNORE_RESULT = False
+CELERY_TRACK_STARTED = True
+CELERY_TIMEZONE = 'Europe/Bucharest'
 
 #SMTP
 #EMAIL_HOST = 'smtp.gmail.com'
