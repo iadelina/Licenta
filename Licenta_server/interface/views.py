@@ -5,6 +5,8 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from .tasks import read_temperature
 from .sensors import TemperatureSensor
+from .led import IndoorLed
+from django.http import HttpResponse
 
 @login_required
 def render_info_page(request):
@@ -18,3 +20,14 @@ def render_info_page(request):
 def render_control_page(request):
     return render(request, 'registration/control.html')
 
+@login_required
+def power_on_led(request):
+    led_object = IndoorLed(19, 'BCM')
+    led_object.turn_on()
+    return render(request, 'registration/control.html')
+
+@login_required
+def power_off_led(request):
+    led_object = IndoorLed(19, 'BCM')
+    led_object.turn_off()
+    return render(request, 'registration/control.html')
