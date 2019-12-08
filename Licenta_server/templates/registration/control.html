@@ -19,9 +19,11 @@
     {% endblock %}
  	{% block content %}
    <div class="h2">Bec camera</div> 
-    <div class="h2"> 
+   <div class="h2">Becul se afla in starea {{ led_state  }} </div>
+   {% include 'registration/messages.html' %}
+   <div class="h2"> 
 	        <span style="display: inline;">
-                   <a href="{% url 'interface:power_on_led' %}" class="buttonfilter">Pornire</a>&nbsp;&nbsp;<a href="{% url 'interface:power_off_led' %}" class="buttonfilter">Oprire</a>
+                   <a href="{% url 'interface:power_on_led' %}" class="buttonfilter">Aprinde</a>&nbsp;&nbsp;<a href="{% url 'interface:power_off_led' %}" class="buttonfilter">Stinge</a>
                  </span>
     </div>
     <div class="container containerMainButtons">
