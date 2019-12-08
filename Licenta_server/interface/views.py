@@ -32,7 +32,7 @@ def power_on_led(request):
         led_object.turn_on()
         state = 'APRINS'
     else:
-        messages.info(request, 'Este deja aprins!')
+        messages.info(request, 'Este deja {}!'.format(state))
     return render(request, 'registration/control.html', {'led_state': state})
 
 @login_required
@@ -43,5 +43,5 @@ def power_off_led(request):
         led_object.turn_off()
         state = 'STINS'
     else:
-        messages.info(request, 'Este deja stins!')
+        messages.info(request, 'Este deja {}!'.format(state))
     return render(request, 'registration/control.html', {'led_state': state})
