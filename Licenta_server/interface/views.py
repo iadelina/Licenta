@@ -7,10 +7,7 @@ from .tasks import read_temperature
 from .sensors import TemperatureSensor
 from .led import IndoorLed
 from django.http import HttpResponse
-from django.contrib import messages
 from .mail import Mail
-import sys
-sys.path.insert(0,'/home/pi/Desktop/Licenta2019/Licenta_senzori')
 
 led_object = IndoorLed(19, 'BCM')
 
@@ -24,7 +21,12 @@ def render_info_page(request):
 
 @login_required
 def render_control_page(request):
+    #led_object = IndoorLed(19, 'BCM')
     state = led_object.get_current_state()
+    if state == 'APRINS':
+        led_object.turn_on()
+    else:
+        led_object.turn_off()
     return render(request, 'registration/control.html', {'led_state': state})
 
 @login_required
@@ -37,21 +39,13 @@ def send_info_mail(request):
 @login_required
 def power_on_led(request):
     #led_object = IndoorLed(19, 'BCM')
-    state = led_object.get_current_state()
-    if state == 'STINS':
-        led_object.turn_on()
-        state = 'APRINS'
-    else:
-        messages.info(request, 'Este deja {}!'.format(state))
+    led_object.turn_on()
+    state = 'APRINS'
     return render(request, 'registration/control.html', {'led_state': state})
 
 @login_required
 def power_off_led(request):
     #led_object = IndoorLed(19, 'BCM')
-    state = led_object.get_current_state()
-    if state == 'APRINS':
-        led_object.turn_off()
-        state = 'STINS'
-    else:
-        messages.info(request, 'Este deja {}!'.format(state))
+    led_object.turn_off()
+    state = 'STINS'
     return render(request, 'registration/control.html', {'led_state': state})
