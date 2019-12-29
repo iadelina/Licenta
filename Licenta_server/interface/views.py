@@ -8,6 +8,9 @@ from .sensors import TemperatureSensor
 from .led import IndoorLed
 from django.http import HttpResponse
 from django.contrib import messages
+from .mail import Mail
+import sys
+sys.path.insert(0,'/home/pi/Desktop/Licenta2019/Licenta_senzori')
 
 led_object = IndoorLed(19, 'BCM')
 
@@ -22,6 +25,13 @@ def render_info_page(request):
 @login_required
 def render_control_page(request):
     state = led_object.get_current_state()
+    return render(request, 'registration/control.html', {'led_state': state})
+
+@login_required
+def send_info_mail(request):
+    state = led_object.get_current_state()
+    ob = Mail()
+    ob.send_mail()
     return render(request, 'registration/control.html', {'led_state': state})
 
 @login_required

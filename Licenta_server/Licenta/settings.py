@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 from django.contrib.messages import constants as messages
+#import djcelery
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -40,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Licenta',
     'interface',
+    #'kombu.transport.django',
+    #'djcelery',
  ]
 
 MIDDLEWARE = [
@@ -127,22 +130,14 @@ LOGIN_REDIRECT_URL='home'
 LOGOUT_REDIRECT_URL='home'
 
 #For RabbitMQ
-BROKER_URL = 'amqp://guest:guest@localhost:5672//'
-CELERY_RESULT_BACKEND = 'amqp'
+BROKER_URL = 'django://'
 
 
-# Celery Data Format
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_IGNORE_RESULT = False
-CELERY_TRACK_STARTED = True
-CELERY_TIMEZONE = 'Europe/Bucharest'
 
 #SMTP
 #EMAIL_HOST = 'smtp.gmail.com'
-#EMAIL_HOST_USER='username'
-#EMAIL_HOST_PASSWORD='password'
+#EMAIL_HOST_USER='ivan.adelina02@gmail.com'
+#EMAIL_HOST_PASSWORD='2Run-re#6564'
 #EMAIL_PORT = 587
 #EMAIL_USE_TLS=True
 

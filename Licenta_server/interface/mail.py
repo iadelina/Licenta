@@ -25,7 +25,7 @@ table, th, td {
        <table">
           <tr>
 	    <th> Temperature </th>
-            <th> Last LED state </th>
+            <th> LED state </th>
           </tr>
           <tr>
             <td> 23*C </td>
@@ -68,7 +68,7 @@ class Mail:
         return message
 
     def send_mail(self):
-	message = create_message()
+        message = self.create_message()
         server = smtplib.SMTP(self.smtp_server, self.port)
         server.starttls()
         server.login(self.sender_email, self.password)
