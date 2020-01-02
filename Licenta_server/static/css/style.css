@@ -130,20 +130,23 @@
 }
 
 .th{
+    text-align: center;
+    align: center;
     border-collapse: collapse;
     border:1px solid black;
 }
 
 .tr {
     text-align: center;
+    align: center;
 }
 
 .trheader {
-	background-color: #61271A;
+
 }
 
 .tr:hover {
-    background-color: #61271A;
+   
 }
 .switch-left-right .switch-label {
 	overflow: hidden;

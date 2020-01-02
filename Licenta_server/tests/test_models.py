@@ -1,5 +1,5 @@
 from django.test import TestCase
-from interface.models import DateTimeModel
+from interface.models import DateTimeModel, RFIDKeysModel
 import datetime
 
 class DateTimeModelTest(TestCase):
@@ -22,3 +22,24 @@ class DateTimeModelTest(TestCase):
        datetime_field = DateTimeModel.objects.get(id=1)
        null_field = datetime_field._meta.get_field('current_datetime').null
        self.assertEquals(null_field, True)
+
+
+class RFIDModelTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        RFIDKeysModel.objects.create(key='12345678910')
+
+    def test_current_key_label(self):
+        key_field = RFIDKeysModel.objects.get(id=1)
+        field_label = key_field._meta.get_field('key').verbose_name
+        self.assertEquals(field_label, 'key')
+
+    def test_current_key_is_blank(self):
+        key_field= RFIDKeysModel.objects.get(id=1)
+        blank = key_field._meta.get_field('key').blank
+        self.assertEquals(blank, True)
+
+    def test_current_key_is_max_length(self):
+        key_field= RFIDKeysModel.objects.get(id=1)
+        blank = key_field._meta.get_field('key').max_length
+        self.assertEquals(blank, 13)

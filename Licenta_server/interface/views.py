@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import DateTimeModel
+from .models import DateTimeModel, RFIDKeysModel
 # Create your views here.
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
@@ -8,6 +8,7 @@ from .sensors import TemperatureSensor
 from .led import IndoorLed
 from django.http import HttpResponse
 from .mail import Mail
+from .forms import AddRFIDKeysForm
 
 led_object = IndoorLed(19, 'BCM')
 
@@ -49,3 +50,16 @@ def power_off_led(request):
     led_object.turn_off()
     state = 'STINS'
     return render(request, 'registration/control.html', {'led_state': state})
+
+@login_required
+def add_new_key(request):
+    form = AddRFIDKeysForm(request.GET)
+    queryset = RFIDKeysModel.objects.all()
+    if request.method == 'POST':
+        #form = AddRFIDKey(request.POST)
+        if form.is_valid():
+            #queryset = RFIDKeys.objects.all()
+            queryset.key = form.cleaned_data['key']
+            queryset.save()
+
+    return render(request, 'registration/new_key.html', {'form':form, 'queryset':queryset})
