@@ -18,7 +18,8 @@
     </header>
     {% endblock %}
  	{% block content %}
-        <form action="" class="form-inline" method="get" style="text-align:center">
+        <form action="" class="form-inline" method="post" style="text-align:center">
+        {% csrf_token %}
 	<ol style="list-style:none;">{{ form }} </ol>
         <input type="submit" value="Adauga cheie noua" class="buttonfilter" style="align:center;">
         </form>
@@ -32,12 +33,13 @@
       </tr>
     </thead>
       <tbody>
-      {% for user in queryform %}
+      {% for item in queryset %}
         <tr style="border-collapse:collapse;border:1px solid black;">
-            <td style="border-collapse:collapse;border:1px solid black;">{{ empty }}</td>
-            <td style="border-collapse:collapse;border:1px solid black;">{{ user.key }}</td>
+            <td style="border-collapse:collapse;border:1px solid black;"> {{ item.id  }}  </td>
+            <td style="border-collapse:collapse;border:1px solid black;"> {{ item.key  }}  </td>
         </tr>
       {% endfor %}
+      
     </tbody>
   </table>
     </div>

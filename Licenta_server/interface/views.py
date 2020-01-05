@@ -9,6 +9,7 @@ from .led import IndoorLed
 from django.http import HttpResponse
 from .mail import Mail
 from .forms import AddRFIDKeysForm
+from django.db.models import Q, Manager
 
 led_object = IndoorLed(19, 'BCM')
 
@@ -53,13 +54,12 @@ def power_off_led(request):
 
 @login_required
 def add_new_key(request):
-    form = AddRFIDKeysForm(request.GET)
+    form = AddRFIDKeysForm(request.POST)
     queryset = RFIDKeysModel.objects.all()
     if request.method == 'POST':
-        #form = AddRFIDKey(request.POST)
         if form.is_valid():
-            #queryset = RFIDKeys.objects.all()
-            queryset.key = form.cleaned_data['key']
-            queryset.save()
+            queryset = RFIDKeysModel.objects.create(key=form.cleaned_data['key'])
+            return render(request, 'registration/new_key_message.html')
+            #queryset = queryset.filter(Q(id__gt=0))
 
     return render(request, 'registration/new_key.html', {'form':form, 'queryset':queryset})
