@@ -1,15 +1,17 @@
 import RPi.GPIO as GPIO
-
+from abc import abstractmethod, ABCMeta
 
 class Led:
-
+    _metaclass_ = ABCMeta
     def __init__(self, pin, mode):
         self.pin = pin
         self.mode = mode
 
+    @abstractmethod
     def turn_on(self):
         pass
 
+    @abstractmethod
     def turn_off(self):
         pass
 

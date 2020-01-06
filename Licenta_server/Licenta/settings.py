@@ -130,9 +130,11 @@ LOGIN_REDIRECT_URL='home'
 LOGOUT_REDIRECT_URL='home'
 
 #For RabbitMQ
-BROKER_URL = 'django://'
-
-
+CELERY_BROKER_URL = 'amqp://pi:Brun0Mars@192.168.5.1'
+CELERY_RESULT_BACKEND = 'db+sqlite:///results.db'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
 
 #SMTP
 #EMAIL_HOST = 'smtp.gmail.com'

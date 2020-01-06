@@ -21,7 +21,7 @@ table, th, td {
 </head>
   <body>
     <p>Hi,<br>
-       This is today's Dailt Mail containing SmartHouse report
+       This is today's Daily Mail containing SmartHouse report
        <table">
           <tr>
 	    <th> Temperature </th>
@@ -29,11 +29,9 @@ table, th, td {
           </tr>
           <tr>
             <td> 23*C </td>
-            <td> ON </td>
+            <td> OFF </td>
           </tr>
        </table> <br>
- <a href="http://www.realpython.com">Real Python</a> 
-       has many great tutorials.
     </p>
   </body>
 </html>
@@ -46,7 +44,7 @@ class Mail:
         self.password="2Run-re#6564"
         self.smtp_server = "smtp.gmail.com"
         self.sender_email = "ivan.adelina02@gmail.com"
-        self.reciever_email = "brancsebastian@gmail.com"
+        self.reciever_email = "adelina.ivan97@gmail.com"
 
 
     def create_message(self):

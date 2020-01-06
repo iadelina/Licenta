@@ -3,7 +3,7 @@ from .models import DateTimeModel, RFIDKeysModel
 # Create your views here.
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
-from .tasks import read_temperature
+from .tasks import send_mail
 from .sensors import TemperatureSensor
 from .led import IndoorLed
 from django.http import HttpResponse
@@ -34,8 +34,9 @@ def render_control_page(request):
 @login_required
 def send_info_mail(request):
     state = led_object.get_current_state()
-    ob = Mail()
-    ob.send_mail()
+    #ob = Mail()
+    #ob.send_mail()
+    send_mail.delay()
     return render(request, 'registration/control.html', {'led_state': state})
 
 @login_required
