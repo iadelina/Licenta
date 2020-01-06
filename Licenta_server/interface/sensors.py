@@ -1,11 +1,12 @@
 import RPi.GPIO as GPIO
+from abc import abstractmethod, ABCMeta
 
 #Set DATA pin
 #BCM 4 => BOARD 7
 #DHT = 4
 
 class Sensor:
-
+    _metaclass_ = ABCMeta
     def __init__(self, pin, mode):
         self.pin = pin
         self.mode = mode
@@ -13,6 +14,7 @@ class Sensor:
     def import_libraries(self):
         pass
 
+    @abstractmethod
     def read_sensor_value(self):
         pass
 
