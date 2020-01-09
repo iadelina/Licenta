@@ -36,7 +36,7 @@ def send_info_mail(request):
     state = led_object.get_current_state()
     #ob = Mail()
     #ob.send_mail()
-    send_mail.delay()
+    #send_mail.delay()
     return render(request, 'registration/control.html', {'led_state': state})
 
 @login_required
