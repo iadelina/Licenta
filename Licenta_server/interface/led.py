@@ -22,17 +22,17 @@ class IndoorLed(Led):
         Led.__init__(self, pin, mode)
 
     def turn_on(self):
-        GPIO.setmode(GPIO.BCM)
+        GPIO.setmode(GPIO.BOARD)
         GPIO.setup(self.pin, GPIO.OUT)
         GPIO.output(self.pin, GPIO.HIGH)
 
     def turn_off(self):
-        GPIO.setmode(GPIO.BCM)
+        GPIO.setmode(GPIO.BOARD)
         GPIO.setup(self.pin, GPIO.OUT)
         GPIO.output(self.pin, GPIO.LOW)
 
     def get_current_state(self):
-        GPIO.setmode(GPIO.BCM)
+        GPIO.setmode(GPIO.BOARD)
         GPIO.setup(self.pin, GPIO.IN)
         state = GPIO.input(self.pin)
         return 'APRINS' if state else 'STINS'

@@ -17,10 +17,9 @@
         </div>
     </header>
     {% endblock %}
-    {% block content %}
- 	 <br><br> 
+    {% block content %} 
     <div class="h2">    
      <p> Noua cheie a fost adaugata cu succes! </p>
-     <p> <a href="{% url 'interface:add_new_key' %}"> Vizualizeaza cheile adaugate deja </a> </p>
+     <p> <a href="{% url 'interface:display_current_keys' %}"> Vizualizeaza cheile adaugate deja </a> </p>
     </div>
     {% endblock %}

@@ -6,19 +6,21 @@ from django.contrib.auth.decorators import login_required
 from .tasks import send_mail
 from .sensors import TemperatureSensor
 from .led import IndoorLed
+from .rfid import *
 from django.http import HttpResponse
 from .mail import Mail
 from .forms import AddRFIDKeysForm
 from django.db.models import Q, Manager
 
-led_object = IndoorLed(19, 'BCM')
+led_object = IndoorLed(35, 'BOARD')
 
 @login_required
 def render_info_page(request):
     datetime_object = DateTimeModel.objects.all()
-    temperature_sensor_object = TemperatureSensor(4, 'BCM')
-    temperature = temperature_sensor_object.display_sensor_value() 
+    #temperature_sensor_object = TemperatureSensor(4, 'BCM')
+    #temperature = temperature_sensor_object.display_sensor_value() 
     #temperature = read_temperature.delay()
+    temperature = 3
     return render(request, 'registration/info.html', {'datetime_object': request.user.last_login, 'temperature': temperature})
 
 @login_required
@@ -55,12 +57,19 @@ def power_off_led(request):
 
 @login_required
 def add_new_key(request):
-    form = AddRFIDKeysForm(request.POST)
     queryset = RFIDKeysModel.objects.all()
     if request.method == 'POST':
+        form = AddRFIDKeysForm(request.POST)
         if form.is_valid():
             queryset = RFIDKeysModel.objects.create(key=form.cleaned_data['key'])
             return render(request, 'registration/new_key_message.html')
             #queryset = queryset.filter(Q(id__gt=0))
-
+    else:
+        form = AddRFIDKeysForm(initial={'key': rfid_scan()})
     return render(request, 'registration/new_key.html', {'form':form, 'queryset':queryset})
+
+@login_required
+def display_current_keys(request):
+    queryset = RFIDKeysModel.objects.all()
+    return render(request, 'registration/display_current_keys.html', {'queryset':queryset})
+
