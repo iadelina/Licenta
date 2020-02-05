@@ -17,10 +17,10 @@ led_object = IndoorLed(35, 'BOARD')
 @login_required
 def render_info_page(request):
     datetime_object = DateTimeModel.objects.all()
-    #temperature_sensor_object = TemperatureSensor(4, 'BCM')
-    #temperature = temperature_sensor_object.display_sensor_value() 
+    temperature_sensor_object = TemperatureSensor(4, 'BCM')
+    temperature = temperature_sensor_object.display_sensor_value() 
     #temperature = read_temperature.delay()
-    temperature = 3
+    #temperature = 3
     return render(request, 'registration/info.html', {'datetime_object': request.user.last_login, 'temperature': temperature})
 
 @login_required
