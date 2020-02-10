@@ -1,4 +1,5 @@
 import RPi.GPIO as GPIO
+GPIO.cleanup()
 from abc import abstractmethod, ABCMeta
 
 class Led:
@@ -34,6 +35,7 @@ class IndoorLed(Led):
         GPIO.output(self.pin, GPIO.LOW)
 
     def get_current_state(self):
+        GPIO.cleanup()
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(self.pin, GPIO.IN)
         state = GPIO.input(self.pin)

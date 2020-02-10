@@ -11,6 +11,7 @@ from django.http import HttpResponse
 from .mail import Mail
 from .forms import AddRFIDKeysForm
 from django.db.models import Q, Manager
+import RPi.GPIO as GPIO
 
 led_object = IndoorLed(35, 'BOARD')
 
@@ -18,7 +19,8 @@ led_object = IndoorLed(35, 'BOARD')
 def render_info_page(request):
     datetime_object = DateTimeModel.objects.all()
     temperature_sensor_object = TemperatureSensor(4, 'BCM')
-    temperature = temperature_sensor_object.display_sensor_value() 
+    temperature = temperature_sensor_object.display_sensor_value()
+    GPIO.cleanup() 
     #temperature = read_temperature.delay()
     #temperature = 3
     return render(request, 'registration/info.html', {'datetime_object': request.user.last_login, 'temperature': temperature})
