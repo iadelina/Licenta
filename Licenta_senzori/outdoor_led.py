@@ -40,7 +40,7 @@ while (time.time() - start) <= 100.0:
    # pwm_led.ChangeDutyCycle(70)
    # time.sleep(2)
    # pwm_led.ChangeDutyCycle(100)
-    time.sleep(2)
+    time.sleep(1)
 
 adc.stop_adc()
 pwm_led.stop()

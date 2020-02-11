@@ -13,10 +13,13 @@ from .forms import AddRFIDKeysForm
 from django.db.models import Q, Manager
 import RPi.GPIO as GPIO
 
-led_object = IndoorLed(35, 'BOARD')
+#GPIO.setmode(GPIO.BOARD)
+GPIO.cleanup()
+#led_object = IndoorLed(35, 'BOARD')
 
 @login_required
 def render_info_page(request):
+    GPIO.cleanup()
     datetime_object = DateTimeModel.objects.all()
     temperature_sensor_object = TemperatureSensor(4, 'BCM')
     temperature = temperature_sensor_object.display_sensor_value()
@@ -27,7 +30,8 @@ def render_info_page(request):
 
 @login_required
 def render_control_page(request):
-    #led_object = IndoorLed(19, 'BCM')
+    GPIO.cleanup()
+    led_object = IndoorLed(35, 'BOARD')
     state = led_object.get_current_state()
     if state == 'APRINS':
         led_object.turn_on()
@@ -37,7 +41,7 @@ def render_control_page(request):
 
 @login_required
 def send_info_mail(request):
-    state = led_object.get_current_state()
+    led_object = IndoorLed(35, 'BOARD')
     #ob = Mail()
     #ob.send_mail()
     #send_mail.delay()
@@ -45,14 +49,14 @@ def send_info_mail(request):
 
 @login_required
 def power_on_led(request):
-    #led_object = IndoorLed(19, 'BCM')
+    led_object = IndoorLed(35, 'BOARD')
     led_object.turn_on()
     state = 'APRINS'
     return render(request, 'registration/control.html', {'led_state': state})
 
 @login_required
 def power_off_led(request):
-    #led_object = IndoorLed(19, 'BCM')
+    led_object = IndoorLed(35, 'BOARD')
     led_object.turn_off()
     state = 'STINS'
     return render(request, 'registration/control.html', {'led_state': state})

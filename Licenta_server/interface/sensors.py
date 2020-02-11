@@ -34,5 +34,10 @@ class TemperatureSensor(Sensor):
        GPIO.cleanup()
 
     def display_sensor_value(self):
-       self.read_sensor_value()
+       GPIO.cleanup()
+       #self.read_sensor_value()
+       import Adafruit_DHT
+       #GPIO.setmode(GPIO.BCM)
+       self.humidity, self.temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, self.pin)
+       GPIO.cleanup()
        return '{0:0.1f}*C'.format(self.temperature)

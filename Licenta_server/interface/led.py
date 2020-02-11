@@ -7,6 +7,7 @@ class Led:
     def __init__(self, pin, mode):
         self.pin = pin
         self.mode = mode
+        GPIO.cleanup()
 
     @abstractmethod
     def turn_on(self):
@@ -39,4 +40,5 @@ class IndoorLed(Led):
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(self.pin, GPIO.IN)
         state = GPIO.input(self.pin)
+        GPIO.cleanup()
         return 'APRINS' if state else 'STINS'
