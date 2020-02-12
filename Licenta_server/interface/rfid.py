@@ -1,3 +1,9 @@
+def write_in_file(key):
+    import sys
+    import os
+    file_buffer = open('/home/pi/Desktop/Licenta_latest/Licenta_senzori/keys.txt', 'a+')
+    file_buffer.write(str(key)+ '\n')
+    file_buffer.close()
 
 def disable_rfid_forever():
     import os
@@ -21,16 +27,19 @@ def rfid_scan():
     GPIO.output(RELAY, GPIO.HIGH)
     file_buffer = open('/home/pi/Desktop/Licenta_latest/Licenta_senzori/keys.txt', 'r+')
     registered_keys = file_buffer.readlines()
+    registered_keys = [i.replace('\n','') for i in registered_keys]
     key_read = False
+    print(registered_keys)
     while key_read is False:
-        for key in registered_keys:
-            print(key)
-            id, text = reader.read()
-            if str(id) != key.replace('\n', ''):
-                key_read = True
-                file_buffer.write(str(id)+ '\n')
-                file_buffer.close()
-                #os.system('sudo python3 /home/pi/Desktop/Licenta_latest/Licenta_senzori/rfid_forever.py &')
-                #GPIO.cleanup()
-                return str(id)
+         id, text = reader.read()
+         if str(id) not in registered_keys:
+             print('**************************')
+             print(id)
+             key_read = True
+             file_buffer.close()
+             return str(id)
+         else:
+             key_read = True
+             file_buffer.close()
+             return 'ini'
     file_buffer.close()

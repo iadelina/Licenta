@@ -18,8 +18,12 @@
     </header>
     {% endblock %}
     {% block content %} 
-    <div class="h2">    
+     <div class="h2">    
      <p> Noua cheie a fost adaugata cu succes! </p>
-     <p> <a href="{% url 'interface:display_current_keys' %}"> Vizualizeaza cheile adaugate deja </a> </p>
+     </div>
+     <div class="h2">
+      <a href="{% url 'interface:display_current_keys' %}" class="buttonfilter">Vizualizeaza cheile adaugate deja</a>
     </div>
+
+     
     {% endblock %}

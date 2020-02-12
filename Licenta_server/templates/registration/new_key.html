@@ -21,7 +21,19 @@
         <form action="" class="form-inline" method="post" style="text-align:center">
         {% csrf_token %}
 	<ol style="list-style:none;">{{ form }} </ol>
-        <input type="submit" value="Adauga cheie noua" class="buttonfilter" style="align:center;">
+        {% if messages %}
+           {% for message in messages %}
+                 <div class="alert {{ message.tags }} m-2" id="msg" role="alert">
+                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>  {{ message }}
+                        </div>
+           <div class="h2">
+           <a href="{% url 'interface:add_new_key' %}" class="buttonfilter">Adaugare alta cheie acces </a></div>
+            {% endfor %}
+        {% else %}        
+      <input type="submit" value="Adauga cheie noua" class="buttonfilter" style="align:center;">
+      </form>
+        {% endif %}
+      
         </form>
     <br><br> 
     <div="h2">    
