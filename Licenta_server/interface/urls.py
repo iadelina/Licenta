@@ -9,6 +9,7 @@ urlpatterns = [
     path('power_off_led', views.power_off_led, name='power_off_led'),
     path('send_info_mail', views.send_info_mail, name='send_info_mail'),
     path('add_new_key', views.add_new_key, name='add_new_key'),
+    path('delete_key', views.delete_key, name='delete_key'),
     path('display_current_keys', views.display_current_keys, name='display_current_keys'),
  #path('adv_search', views.adv_search, name='adv_search'), path('NA', 
     #views.not_available_link, name='NA')

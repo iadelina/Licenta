@@ -17,24 +17,13 @@
         </div>
     </header>
     {% endblock %}
- 	{% block content %}
-   <div class="h2">Bec camera</div> 
-   <div class="h2">Becul se afla in starea {{ led_state  }} </div>
-
-   <div class="h2"> 
-	        <span style="display: inline;">
-                   <a href="{% url 'interface:power_on_led' %}" class="buttonfilter">Aprinde</a>&nbsp;&nbsp;<a href="{% url 'interface:power_off_led' %}" class="buttonfilter">Stinge</a>
-                 </span>
+    {% block content %} 
+     <div class="h2">    
+     <p> Noua cheie a fost stearsa cu succes! </p>
+     </div>
+     <div class="h2">
+      <a href="{% url 'interface:display_current_keys' %}" class="buttonfilter">Vizualizeaza cheile ramase</a>
     </div>
-   <div class="h2">
-      <a href="{% url 'interface:send_info_mail' %}" class="buttonfilter">Trimite mail</a> 
-    </div>
-   <div class="h2">
-      <a href="{% url 'interface:add_new_key' %}" class="buttonfilter">Adaugare cheie acces </a></div>
-   <div class="h2">
-      <a href="{% url 'interface:delete_key' %}" class="buttonfilter">Stergere cheie acces </a></div>
-<div class="container containerMainButtons">
 
-    </div>     
-	{% endblock %}
-
+     
+    {% endblock %}

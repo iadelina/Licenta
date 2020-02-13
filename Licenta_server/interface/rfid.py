@@ -5,6 +5,17 @@ def write_in_file(key):
     file_buffer.write(str(key)+ '\n')
     file_buffer.close()
 
+def delete_from_file(key):
+    import sys
+    import os
+    file_buffer = open('/home/pi/Desktop/Licenta_latest/Licenta_senzori/keys.txt', 'r+')
+    for line in file_buffer:
+        print(line)
+        if line == key:
+            line = line.replace(key, "")
+            file_buffer.write(line)
+    file_buffer.close()
+    
 def disable_rfid_forever():
     import os
     pid = os.system('ps aux | grep rfid_forever.py | awk \'{print $2}\' | head -1')

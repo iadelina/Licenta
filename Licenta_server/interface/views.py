@@ -12,6 +12,7 @@ from .mail import Mail
 from .forms import AddRFIDKeysForm
 from django.db.models import Q, Manager
 from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist
 import RPi.GPIO as GPIO
 
 #GPIO.setmode(GPIO.BOARD)
@@ -81,6 +82,25 @@ def add_new_key(request):
         else:
             form = AddRFIDKeysForm(initial={'key': key})
     return render(request, 'registration/new_key.html', {'form':form, 'queryset':queryset})
+
+@login_required
+def delete_key(request):
+    if request.method == 'POST':
+        form = AddRFIDKeysForm(request.POST)
+        if form.is_valid():
+            try:
+               value = RFIDKeysModel.objects.get(pk=form['key'].value())
+               delete_from_file(str(value))
+               value.delete()
+               return render(request, 'registration/delete_key_message.html')
+            except ObjectDoesNotExist:
+                    queryset = RFIDKeysModel.objects.all()
+                    messages.info(request,'Cheia nu exista!')
+                    return render(request, 'registration/delete_key.html', {'form':form, 'queryset':queryset})
+    else:
+        queryset = RFIDKeysModel.objects.all()
+        form = AddRFIDKeysForm(initial={'key': ''})
+    return render(request, 'registration/delete_key.html', {'form':form, 'queryset':queryset})
 
 @login_required
 def display_current_keys(request):

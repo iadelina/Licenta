@@ -5,20 +5,38 @@
     <meta name="viewport" content="width=100%, initial-scale=1">
     <meta name="description" content="Controlul Locuintei">
     <link href="/static/css/style.css" rel="stylesheet">
-    <title>Controlul Locuintei{% block title %}{% endblock %}</title>
-
+    <title>Controlul Locuintei{% block title %}{% endblock %}</title> 
+    
     <header>
         <div class="container">
                 <ul class="ul">
                             <li class="li"><a href="{% url 'home' %}"><font face="Euphemia">DESPRE</font></a></li>
                             <li class="li"><a href="{% url 'interface:render_info_page' %}"><font face="Euphemia">INFO</font></a></li>
                             <li class="li"><a href="{% url 'interface:render_control_page' %}"><font face="Euphemia">CONTROL</font></a></li>
-                </ul>
+		</ul>
         </div>
     </header>
     {% endblock %}
-    {% block content %}
-    <div="h2">
+ 	{% block content %}
+        <form action="" class="form-inline" method="post" style="text-align:center">
+        {% csrf_token %}
+	<ol style="list-style:none;">{{ form }} </ol>
+        {% if messages %}
+           {% for message in messages %}
+                 <div class="alert {{ message.tags }} m-2" id="msg" role="alert">
+                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>  {{ message }}
+                        </div>
+           <div class="h2">
+           <a href="{% url 'interface:delete_key' %}" class="buttonfilter">Sterge alta cheie </a></div>
+            {% endfor %}
+        {% else %}        
+      <input type="submit" value="Sterge cheie" class="buttonfilter" style="align:center;">
+      </form>
+        {% endif %}
+      
+        </form>
+    <br><br> 
+    <div="h2">    
     <table align="center", style="border-collapse:collapse;border:1px solid black;">
     <thead>
       <tr style="border-collapse:collapse;border:1px solid black;">
@@ -33,13 +51,8 @@
             <td style="border-collapse:collapse;border:1px solid black;"> {{ item.key  }}  </td>
         </tr>
       {% endfor %}
+      
     </tbody>
   </table>
     </div>
-     <div class="h2">
-      <a href="{% url 'interface:add_new_key' %}" class="buttonfilter">Adaugare alta cheie acces </a></div>
-      <div class="h2">
-      <a href="{% url 'interface:delete_key' %}" class="buttonfilter">Sterge alta cheie acces </a></div>
-
-    {% endblock %}
-
+{% endblock %}
