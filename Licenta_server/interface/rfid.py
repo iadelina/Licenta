@@ -1,21 +1,20 @@
 def write_in_file(key):
     import sys
     import os
-    file_buffer = open('/home/pi/Desktop/Licenta_latest/Licenta_senzori/keys.txt', 'a+')
-    file_buffer.write(str(key)+ '\n')
-    file_buffer.close()
+    with open('/home/pi/Desktop/Licenta_latest/Licenta_senzori/keys.txt', 'a+') as file_buffer:
+        file_buffer.write(str(key)+ '\n')
 
 def delete_from_file(key):
     import sys
     import os
-    file_buffer = open('/home/pi/Desktop/Licenta_latest/Licenta_senzori/keys.txt', 'r+')
-    for line in file_buffer:
-        print(line)
-        if line == key:
-            line = line.replace(key, "")
-            file_buffer.write(line)
-    file_buffer.close()
-    
+    with open('/home/pi/Desktop/Licenta_latest/Licenta_senzori/keys.txt', 'r') as file_buffer:
+        registered_keys = file_buffer.readlines()
+        registered_keys = [i.replace('\n','') for i in registered_keys]
+        registered_keys.remove(str(key))
+    with open('/home/pi/Desktop/Licenta_latest/Licenta_senzori/keys.txt', 'w') as file_buffer:
+        for line in registered_keys:
+            file_buffer.write("%s\n" % line)
+
 def disable_rfid_forever():
     import os
     pid = os.system('ps aux | grep rfid_forever.py | awk \'{print $2}\' | head -1')

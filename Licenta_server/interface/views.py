@@ -90,7 +90,8 @@ def delete_key(request):
         if form.is_valid():
             try:
                value = RFIDKeysModel.objects.get(pk=form['key'].value())
-               delete_from_file(str(value))
+               key_value = getattr(value, 'key')
+               delete_from_file(str(key_value))
                value.delete()
                return render(request, 'registration/delete_key_message.html')
             except ObjectDoesNotExist:
