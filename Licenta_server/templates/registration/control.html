@@ -27,12 +27,17 @@
                  </span>
     </div>
    <div class="h2">
-      <a href="{% url 'interface:send_info_mail' %}" class="buttonfilter">Trimite mail</a> 
-    </div>
+      <a href="{% url 'interface:enable_secure_mode' %}" class="buttonfilter">&nbsp;&nbsp;Activeaza sistemul<br>de securitate&nbsp;&nbsp;</a></div> 
    <div class="h2">
-      <a href="{% url 'interface:add_new_key' %}" class="buttonfilter">Adaugare cheie acces </a></div>
+      <a href="{% url 'interface:disable_secure_mode' %}" class="buttonfilter">Dezactiveaza sistemul<br>de securitate</a>
+ </div>
    <div class="h2">
-      <a href="{% url 'interface:delete_key' %}" class="buttonfilter">Stergere cheie acces </a></div>
+      <span style="display: inline;">
+      <a href="{% url 'interface:add_new_key' %}" class="buttonfilter">Adaugare cheie</a>
+ 
+      <a href="{% url 'interface:delete_key' %}" class="buttonfilter">Stergere cheie</a>
+      </span>
+   </div>
 <div class="container containerMainButtons">
 
     </div>     

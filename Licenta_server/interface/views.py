@@ -3,10 +3,11 @@ from .models import DateTimeModel, RFIDKeysModel
 # Create your views here.
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
-from .tasks import send_mail
+from .tasks import send_mail, run_secure_mode
 from .sensors import TemperatureSensor
 from .led import IndoorLed
 from .rfid import *
+from .utils import *
 from django.http import HttpResponse
 from .mail import Mail
 from .forms import AddRFIDKeysForm
@@ -107,4 +108,15 @@ def delete_key(request):
 def display_current_keys(request):
     queryset = RFIDKeysModel.objects.all()
     return render(request, 'registration/display_current_keys.html', {'queryset':queryset})
+
+@login_required
+def enable_secure_mode(request):
+    run_secure_mode.delay(True, True)
+    return render(request, 'registration/enable_secure_mode_message.html')
+
+@login_required
+def disable_secure_mode(request):
+    run_secure_mode.delay(False, False)
+    return render(request, 'registration/disable_secure_mode_message.html')
+
 
