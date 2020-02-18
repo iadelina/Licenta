@@ -23,6 +23,9 @@ def secure_mode(flag):
                     GPIO.output(BUZZ, GPIO.LOW)
                     time.sleep(1)
                     GPIO.output(BUZZ, GPIO.HIGH)
+                    GPIO.output(BUZZ, GPIO.LOW)
+                    time.sleep(1)
+                    GPIO.output(BUZZ, GPIO.HIGH)
                     start = time.time()
                     counter = 1
             else:
