@@ -26,9 +26,14 @@ def secure_mode(flag):
                     GPIO.output(BUZZ, GPIO.LOW)
                     time.sleep(1)
                     GPIO.output(BUZZ, GPIO.HIGH)
+                    #trigger_message('0740262875', 'Alerta!')
                     start = time.time()
                     counter = 1
             else:
                 counter = 1
     else:
         GPIO.remove_event_detect(15)
+
+def trigger_message(phone_number, content):
+    import os
+    os.system('sh /home/pi/Desktop/Licenta_latest/Licenta_senzori/send_message.sh {} {}'.format(phone_number, content))
