@@ -21,12 +21,13 @@ def secure_mode(flag):
                     end = time.time()
                     print('Alerta! {}'.format(int(end)-int(start)))
                     GPIO.output(BUZZ, GPIO.LOW)
-                    time.sleep(1)
+                    time.sleep(0.5)
                     GPIO.output(BUZZ, GPIO.HIGH)
                     GPIO.output(BUZZ, GPIO.LOW)
-                    time.sleep(1)
+                    time.sleep(0.5)
                     GPIO.output(BUZZ, GPIO.HIGH)
-                    #trigger_message('0740262875', 'Alerta!')
+                    print('inainte trigger')
+                    trigger_message('0740262875', 'Alerta!')
                     start = time.time()
                     counter = 1
             else:

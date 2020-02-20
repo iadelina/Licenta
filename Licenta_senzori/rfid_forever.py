@@ -4,7 +4,7 @@ from time import sleep
 import sys
 import os
 from mfrc522 import SimpleMFRC522
-reader = SimpleMFRC522()
+#reader = SimpleMFRC522()
 #key = "1088853604795"
 RELAY=37
 counter=1
@@ -13,6 +13,7 @@ GPIO.setup(RELAY, GPIO.OUT)
 GPIO.output(RELAY, GPIO.HIGH)
 print("Hold a tag near the reader")
 while True:
+    reader = SimpleMFRC522()
     id, text = reader.read()
     print('****')
     file_buffer = open('/home/pi/Desktop/Licenta_latest/Licenta_senzori/keys.txt', 'r+')

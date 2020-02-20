@@ -16,7 +16,7 @@ OUTDOOR_LED = 40
 BUZZ=8
 GPIO.setup(BUZZ, GPIO.OUT)
 GPIO.setup(OUTDOOR_LED, GPIO.OUT)
-GPIO.output(BUZZ, GPIO.LOW)
+GPIO.output(BUZZ, GPIO.HIGH)
 # to checkk frequency
 pwm_led = GPIO.PWM(OUTDOOR_LED, 100)
 pwm_led.start(0)
@@ -50,25 +50,25 @@ def get_phone_number():
 def soil(value):
     global counter_soil
     percent = (value - float(MIN_TRESHOLD)) * float(100) / (float(MAX_TRESHOLD) - float(MIN_TRESHOLD))
-    # print('Channel 0: {0:.2f} %'.format(percent))
+    print('Channel 0: {0:.2f} %'.format(percent))
     if percent > MAX_FLOOD_TRESHOLD:
         counter_soil += 1
         time.sleep(0.5)
         if counter_soil == 10:
             print('inundatie')
             counter_soil = 1
-            #trigger_alarm_and_message(1, '0740262875', 'Inundatie!')
+            trigger_alarm_and_message(1, '0740262875', 'Inundatie!')
 
 def gas(value):
     global counter_gas
-    print('*******************************')
-    print('Channel 2: {}'.format(value))
+    #print('*******************************')
+    #print('Channel 2: {}'.format(value))
     # Pause for half a second.
     if value > MAX_GAS_VALUE:
         print('GAS DETECTED')
         counter_gas += 1
         time.sleep(0.5)
-    if counter_gas == 10:
+    if counter_gas == 5:
         print('ring alarm')
         #trigger_alarm_and_message(0.2, '0740262875', 'Dectectie gaz!')
         counter = 1
@@ -93,9 +93,8 @@ while True:
         values[i] = adc.read_adc(i, gain=GAIN)
     #channel 0 reads soil sensor
     soil(values[0])
-    print(counter_soil)
     #channel 1 read fotoresistor
     outdoor_light(values[1])
     #channel 2 read gas sensor
     gas(values[2])
-    print(counter_gas)
+
