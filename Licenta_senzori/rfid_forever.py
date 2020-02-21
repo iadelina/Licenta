@@ -13,6 +13,8 @@ GPIO.setup(RELAY, GPIO.OUT)
 GPIO.output(RELAY, GPIO.HIGH)
 print("Hold a tag near the reader")
 while True:
+    RELAY=37
+    GPIO.setup(RELAY, GPIO.OUT)
     reader = SimpleMFRC522()
     id, text = reader.read()
     print('****')

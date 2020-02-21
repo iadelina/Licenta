@@ -36,6 +36,7 @@ exec(macro)
 GAIN = 1
 counter_gas = 1
 counter_soil = 1
+trigger_once = 0
 print('Reading ADS1x15 values, press Ctrl-C to quit...')
 
 def trigger_alarm_and_message(seconds, phone_number, content):
@@ -61,6 +62,7 @@ def soil(value):
 
 def gas(value):
     global counter_gas
+    global trigger_once
     #print('*******************************')
     #print('Channel 2: {}'.format(value))
     # Pause for half a second.
@@ -68,10 +70,11 @@ def gas(value):
         print('GAS DETECTED')
         counter_gas += 1
         time.sleep(0.5)
-    if counter_gas == 5:
+    if counter_gas == 5 and trigger_once == 0:
         print('ring alarm')
-        #trigger_alarm_and_message(0.2, '0740262875', 'Dectectie gaz!')
-        counter = 1
+        trigger_alarm_and_message(0.2, '0740262875', 'Dectectie gaz!')
+        counter_gas = 1
+        trigger_once = 1
 
 def outdoor_light(value):
     value_for_duty_cycle = ((value // int(256) - int(MIN_TRESHOLD_LIGHTINING)) * int(100)) / (
