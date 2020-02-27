@@ -17,14 +17,14 @@
         </div>
     </header>
     {% endblock %}
- 	{% block content %}
-   <div class="h2">Bec camera</div> 
-   <div class="h2">Becul se afla in starea {{ led_state  }} </div>
-
-   <div class="h2"> 
-	        <span style="display: inline;">
-                   <a href="{% url 'interface:power_on_led' %}" class="buttonfilter">Aprinde</a>&nbsp;&nbsp;<a href="{% url 'interface:power_off_led' %}" class="buttonfilter">Stinge</a>
-                 </span>
+ 	{% block content %} 
+   <div class="h2">Becul se afla in starea {{ led_state  }}
+   	          {% if led_state == "STINS" %}
+                   <p><a href="{% url 'interface:power_on_led' %}" class="buttonfilter">Aprinde</a></p>
+                   {% else %}
+                   <p><a href="{% url 'interface:power_off_led' %}" class="buttonfilter">Stinge</a></p>
+                   {% endif %}
+                   
     </div>
    <div class="h2">
        {% if secure == "0" %}

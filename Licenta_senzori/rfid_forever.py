@@ -33,8 +33,10 @@ while True:
                     print("Door closed!\n")
                     GPIO.output(RELAY,GPIO.HIGH)
                     counter = 1
-    file_buffer.close()
-    sleep(1)
+                    file_buffer = open('/home/pi/Desktop/Licenta_latest/Licenta_senzori/secure.txt', 'w')
+                    file_buffer.write('1')
+                    file_buffer.close()
+    sleep(0.5)
 #GPIO.cleanup()
 #exit=os.getpid()
 #os.system('kill -9 {}'.format(exit))

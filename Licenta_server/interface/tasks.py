@@ -9,7 +9,7 @@ def send_mail():
     return mail_object.send_mail()
 
 @shared_task
-def run_secure_mode(self, flag, minutes):
+def run_secure_mode(self, flag):
     file_buffer = open('/home/pi/Desktop/Licenta_latest/Licenta_senzori/secure.txt', 'w')
     if flag:
         file_buffer.write('1')
@@ -17,8 +17,5 @@ def run_secure_mode(self, flag, minutes):
     else:
         file_buffer.write('0')
         file_buffer.close()
-        sleep(minutes*60)
-        file_buffer = open('/home/pi/Desktop/Licenta_latest/Licenta_senzori/secure.txt', 'w')
-        file_buffer.write('1')
-        file_buffer.close()
+
 

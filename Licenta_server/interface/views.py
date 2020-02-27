@@ -119,12 +119,12 @@ def display_current_keys(request):
 
 @login_required
 def enable_secure_mode(request):
-    run_secure_mode.delay(True, True, int(2))
+    run_secure_mode.delay(True, True)
     return render(request, 'registration/enable_secure_mode_message.html')
 
 @login_required
 def disable_secure_mode(request):
-    run_secure_mode.delay(False, False, int(2))
+    run_secure_mode.delay(False, False)
     return render(request, 'registration/disable_secure_mode_message.html')
 
 
