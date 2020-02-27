@@ -10,7 +10,7 @@ from .rfid import *
 from .utils import *
 from django.http import HttpResponse
 from .mail import Mail
-from .forms import AddRFIDKeysForm
+from .forms import *
 from django.db.models import Q, Manager
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
@@ -40,7 +40,11 @@ def render_control_page(request):
         led_object.turn_on()
     else:
         led_object.turn_off()
-    return render(request, 'registration/control.html', {'led_state': state})
+    file_buffer = open('/home/pi/Desktop/Licenta_latest/Licenta_senzori/secure.txt', 'r')
+    secure = '0' if file_buffer.read()=='0' else '1'
+    file_buffer.close()
+    
+    return render(request, 'registration/control.html', {'led_state': state, 'secure': secure})
 
 @login_required
 def send_info_mail(request):
@@ -55,14 +59,18 @@ def power_on_led(request):
     led_object = IndoorLed(35, 'BOARD')
     led_object.turn_on()
     state = 'APRINS'
-    return render(request, 'registration/control.html', {'led_state': state})
+    file_buffer = open('/home/pi/Desktop/Licenta_latest/Licenta_senzori/secure.txt', 'r')
+    secure = '0' if file_buffer.read()=='0' else '1'
+    return render(request, 'registration/control.html', {'led_state': state, 'secure': secure})
 
 @login_required
 def power_off_led(request):
     led_object = IndoorLed(35, 'BOARD')
     led_object.turn_off()
     state = 'STINS'
-    return render(request, 'registration/control.html', {'led_state': state})
+    file_buffer = open('/home/pi/Desktop/Licenta_latest/Licenta_senzori/secure.txt', 'r')
+    secure = '0' if file_buffer.read()=='0' else '1'
+    return render(request, 'registration/control.html', {'led_state': state, 'secure': secure})
 
 @login_required
 def add_new_key(request):
@@ -95,7 +103,7 @@ def delete_key(request):
                delete_from_file(str(key_value))
                value.delete()
                return render(request, 'registration/delete_key_message.html')
-            except ObjectDoesNotExist:
+            except (ObjectDoesNotExist, ValueError):
                     queryset = RFIDKeysModel.objects.all()
                     messages.info(request,'Cheia nu exista!')
                     return render(request, 'registration/delete_key.html', {'form':form, 'queryset':queryset})
@@ -111,12 +119,12 @@ def display_current_keys(request):
 
 @login_required
 def enable_secure_mode(request):
-    run_secure_mode.delay(True, True)
+    run_secure_mode.delay(True, True, int(2))
     return render(request, 'registration/enable_secure_mode_message.html')
 
 @login_required
 def disable_secure_mode(request):
-    run_secure_mode.delay(False, False)
+    run_secure_mode.delay(False, False, int(2))
     return render(request, 'registration/disable_secure_mode_message.html')
 
 

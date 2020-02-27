@@ -27,10 +27,14 @@
                  </span>
     </div>
    <div class="h2">
-      <a href="{% url 'interface:enable_secure_mode' %}" class="buttonfilter">&nbsp;&nbsp;Activeaza sistemul<br>de securitate&nbsp;&nbsp;</a></div> 
-   <div class="h2">
+       {% if secure == "0" %}
+             <p> Sistemul de securitate este inactiv</p>
+      <a href="{% url 'interface:enable_secure_mode' %}" class="buttonfilter">&nbsp;&nbsp;Activeaza sistemul<br>de securitate&nbsp;&nbsp;</a> 
+      {% else %}
+             <p> Sistemul de securitate este activ</p>  
       <a href="{% url 'interface:disable_secure_mode' %}" class="buttonfilter">Dezactiveaza sistemul<br>de securitate</a>
- </div>
+      {%endif%}
+</div>
    <div class="h2">
       <span style="display: inline;">
       <a href="{% url 'interface:add_new_key' %}" class="buttonfilter">Adaugare cheie</a>

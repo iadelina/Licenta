@@ -51,7 +51,6 @@ def get_phone_number():
 def soil(value):
     global counter_soil
     percent = (value - float(MIN_TRESHOLD)) * float(100) / (float(MAX_TRESHOLD) - float(MIN_TRESHOLD))
-    print('Channel 0: {0:.2f} %'.format(percent))
     if percent > MAX_FLOOD_TRESHOLD:
         counter_soil += 1
         time.sleep(0.5)

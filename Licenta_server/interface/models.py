@@ -10,3 +10,11 @@ class DateTimeModel(models.Model):
 
 class RFIDKeysModel(models.Model):
     key = models.CharField(max_length=13, blank=True)
+
+class PhoneNumberModel(models.Model):
+    number = models.CharField(max_length=10, blank=True)
+
+class SecureModel(models.Model):
+    minute = models.CharField(max_length=10, blank=True)
+
+
