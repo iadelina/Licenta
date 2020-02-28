@@ -28,10 +28,10 @@
     </div>
    <div class="h2">
        {% if secure == "0" %}
-             <p> Sistemul de securitate este inactiv</p>
+             <p> Sistemul de securitate este INACTIV</p>
       <a href="{% url 'interface:enable_secure_mode' %}" class="buttonfilter">&nbsp;&nbsp;Activeaza sistemul<br>de securitate&nbsp;&nbsp;</a> 
       {% else %}
-             <p> Sistemul de securitate este activ</p>  
+             <p> Sistemul de securitate este ACTIV</p>  
       <a href="{% url 'interface:disable_secure_mode' %}" class="buttonfilter">Dezactiveaza sistemul<br>de securitate</a>
       {%endif%}
 </div>
@@ -42,8 +42,9 @@
       <a href="{% url 'interface:delete_key' %}" class="buttonfilter">Stergere cheie</a>
       </span>
    </div>
-<div class="container containerMainButtons">
-
-    </div>     
+      <div class="h2">
+           <p> Numarul de telefon inregistrat este {{ phone }} </p>
+            <a href="{% url 'interface:add_new_phone_number' %}" class="buttonfilter">Adauga alt numar<br>de telefon</a>
+       </div>     
 	{% endblock %}
 

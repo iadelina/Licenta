@@ -9,6 +9,10 @@ GPIO.output(BUZZ, GPIO.HIGH)
 GPIO.add_event_detect(15, GPIO.RISING,bouncetime=200)
 start = time.time()
 
+file_buffer = open('/home/pi/Desktop/Licenta_latest/Licenta_senzori/secure.txt', 'w')
+file_buffer.write('1')
+file_buffer.close()
+
 def trigger_message(phone_number, content):
     import os
     os.system('sh /home/pi/Desktop/Licenta_latest/Licenta_senzori/send_message.sh {} {}'.format(phone_number, content))

@@ -39,14 +39,14 @@ counter_soil = 1
 trigger_once = 0
 print('Reading ADS1x15 values, press Ctrl-C to quit...')
 
-def trigger_alarm_and_message(seconds, phone_number, content):
+def trigger_alarm_and_message(seconds, content):
      GPIO.output(BUZZ, GPIO.LOW)
      time.sleep(seconds)
      GPIO.output(BUZZ, GPIO.HIGH)
+     file_buffer = open('/home/pi/Desktop/Licenta_latest/Licenta_senzori/phone.txt', 'r')
+     phone_number = file_buffer.read()
+     file_buffer.close()
      os.system('sh /home/pi/Desktop/Licenta_latest/Licenta_senzori/send_message.sh {} {}'.format(phone_number, content))
-
-def get_phone_number():
-    pass
 
 def soil(value):
     global counter_soil
@@ -57,7 +57,7 @@ def soil(value):
         if counter_soil == 10:
             print('inundatie')
             counter_soil = 1
-            trigger_alarm_and_message(1, '0740262875', 'Inundatie!')
+            trigger_alarm_and_message(1, 'Inundatie!')
 
 def gas(value):
     global counter_gas
@@ -71,7 +71,7 @@ def gas(value):
         time.sleep(0.5)
     if counter_gas == 5 and trigger_once == 0:
         print('ring alarm')
-        trigger_alarm_and_message(0.2, '0740262875', 'Dectectie gaz!')
+        trigger_alarm_and_message(0.2, 'Dectectie gaz!')
         counter_gas = 1
         trigger_once = 1
 

@@ -13,6 +13,7 @@ urlpatterns = [
     path('display_current_keys', views.display_current_keys, name='display_current_keys'),
     path('enable_secure_mode', views.enable_secure_mode, name='enable_secure_mode'),
     path('disable_secure_mode', views.disable_secure_mode, name='disable_secure_mode'),
+    path('add_new_phone_number', views.add_new_phone_number, name='add_new_phone_number'),
  #path('adv_search', views.adv_search, name='adv_search'), path('NA', 
     #views.not_available_link, name='NA')
 #    path('interface/',include('django.contrib.auth.urls'))

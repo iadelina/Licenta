@@ -1,8 +1,14 @@
-def write_in_file(key):
+def write_in_file(key, file):
     import sys
     import os
-    with open('/home/pi/Desktop/Licenta_latest/Licenta_senzori/keys.txt', 'a+') as file_buffer:
+    with open(file, 'a+') as file_buffer:
         file_buffer.write(str(key)+ '\n')
+
+def write(key, file):
+    import os
+    file_buffer = open(file, 'w')
+    file_buffer.write(key)
+    file_buffer.close()
 
 def delete_from_file(key):
     import sys

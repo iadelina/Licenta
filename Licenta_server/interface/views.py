@@ -43,8 +43,10 @@ def render_control_page(request):
     file_buffer = open('/home/pi/Desktop/Licenta_latest/Licenta_senzori/secure.txt', 'r')
     secure = '0' if file_buffer.read()=='0' else '1'
     file_buffer.close()
-    
-    return render(request, 'registration/control.html', {'led_state': state, 'secure': secure})
+    file_buffer1 = open('/home/pi/Desktop/Licenta_latest/Licenta_senzori/phone.txt', 'r')
+    phone = file_buffer1.read()
+    file_buffer1.close()
+    return render(request, 'registration/control.html', {'led_state': state, 'secure': secure, 'phone': phone})
 
 @login_required
 def send_info_mail(request):
@@ -61,7 +63,11 @@ def power_on_led(request):
     state = 'APRINS'
     file_buffer = open('/home/pi/Desktop/Licenta_latest/Licenta_senzori/secure.txt', 'r')
     secure = '0' if file_buffer.read()=='0' else '1'
-    return render(request, 'registration/control.html', {'led_state': state, 'secure': secure})
+    file_buffer.close()
+    file_buffer1 = open('/home/pi/Desktop/Licenta_latest/Licenta_senzori/phone.txt', 'r')
+    phone = file_buffer1.read()
+    file_buffer1.close()
+    return render(request, 'registration/control.html', {'led_state': state, 'secure': secure, 'phone': phone})
 
 @login_required
 def power_off_led(request):
@@ -70,7 +76,11 @@ def power_off_led(request):
     state = 'STINS'
     file_buffer = open('/home/pi/Desktop/Licenta_latest/Licenta_senzori/secure.txt', 'r')
     secure = '0' if file_buffer.read()=='0' else '1'
-    return render(request, 'registration/control.html', {'led_state': state, 'secure': secure})
+    file_buffer.close()
+    file_buffer1 = open('/home/pi/Desktop/Licenta_latest/Licenta_senzori/phone.txt', 'r')
+    phone = file_buffer1.read()
+    file_buffer1.close()
+    return render(request, 'registration/control.html', {'led_state': state, 'secure': secure, 'phone': phone})
 
 @login_required
 def add_new_key(request):
@@ -79,7 +89,7 @@ def add_new_key(request):
         form = AddRFIDKeysForm(request.POST)
         if form.is_valid():
             queryset = RFIDKeysModel.objects.create(key=form.cleaned_data['key'])
-            write_in_file(form['key'].value())
+            write_in_file(form['key'].value(), '/home/pi/Desktop/Licenta_latest/Licenta_senzori/keys.txt')
             return render(request, 'registration/new_key_message.html')
             #queryset = queryset.filter(Q(id__gt=0))
     else:
@@ -127,4 +137,15 @@ def disable_secure_mode(request):
     run_secure_mode.delay(False, False)
     return render(request, 'registration/disable_secure_mode_message.html')
 
+@login_required
+def add_new_phone_number(request):
+    if request.method == 'POST':
+        form = PhoneNumberForm(request.POST)
+        if form.is_valid():
+            #queryset = RFIDKeysModel.objects.create(number=form.cleaned_data['number'])
+            write(form['number'].value(), '/home/pi/Desktop/Licenta_latest/Licenta_senzori/phone.txt')
+            return render(request, 'registration/new_phone_message.html')
+    else:
+        form = PhoneNumberForm(initial={'number': ''})
+    return render(request, 'registration/new_phone_number.html', {'form':form})
 
