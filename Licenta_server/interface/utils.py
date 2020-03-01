@@ -1,3 +1,5 @@
+from django.core.exceptions import ValidationError
+
 def secure_mode(flag):
     counter = 1
     channel = 15
@@ -41,3 +43,13 @@ def trigger_message(content):
     phone_number = file_buffer.read()
     file_buffer.close()
     os.system('sh /home/pi/Desktop/Licenta_latest/Licenta_senzori/send_message.sh {} {}'.format(phone_number, content))
+
+
+def validator(value):
+    flag = False
+    for i in value:
+        if i not in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+            flag = True
+    if len(value) != 10 or flag:
+        raise ValidationError('Numarul de telefon este invalid.')
+

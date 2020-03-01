@@ -20,8 +20,20 @@
  	{% block content %}
         <form action="" class="form-inline" method="post" style="text-align:center">
         {% csrf_token %}
-	<ol style="list-style:none;">{{ form }} </ol>       
-      <input type="submit" value="Adauga numar telefon nou" class="buttonfilter" style="align:center;">
+	<ol style="list-style:none;">{{ form }} </ol>
+        {% if messages %}
+           {% for message in messages %}
+                 <div class="alert {{ message.tags }} m-2" id="msg" role="alert">
+                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>  {{ message }}
+                        </div>
+                     
+           <div class="h2">
+           <a href="{% url 'interface:add_new_phone_number' %}" class="buttonfilter">Adaugare alt numar de telefon </a></div>
+            {% endfor %}
+        {% else %}
+      <input type="submit" value="Actualizeaza numarul" class="buttonfilter" style="align:center;">
+      </form>
+        {% endif %}
         </form>
     <br><br> 
     

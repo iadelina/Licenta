@@ -13,7 +13,7 @@ from .mail import Mail
 from .forms import *
 from django.db.models import Q, Manager
 from django.contrib import messages
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 import RPi.GPIO as GPIO
 
 #GPIO.setmode(GPIO.BOARD)
@@ -141,10 +141,13 @@ def disable_secure_mode(request):
 def add_new_phone_number(request):
     if request.method == 'POST':
         form = PhoneNumberForm(request.POST)
-        if form.is_valid():
-            #queryset = RFIDKeysModel.objects.create(number=form.cleaned_data['number'])
+        try:
+            validator(form['number'].value())
             write(form['number'].value(), '/home/pi/Desktop/Licenta_latest/Licenta_senzori/phone.txt')
             return render(request, 'registration/new_phone_message.html')
+        except ValidationError:
+            messages.info(request, 'Numarul de telefon este invalid!')
+            render(request, 'registration/new_phone_number.html', {'form':form})
     else:
         form = PhoneNumberForm(initial={'number': ''})
     return render(request, 'registration/new_phone_number.html', {'form':form})

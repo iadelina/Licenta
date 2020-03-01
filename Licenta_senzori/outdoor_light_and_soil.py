@@ -45,6 +45,7 @@ def trigger_alarm_and_message(seconds, content):
      GPIO.output(BUZZ, GPIO.HIGH)
      file_buffer = open('/home/pi/Desktop/Licenta_latest/Licenta_senzori/phone.txt', 'r')
      phone_number = file_buffer.read()
+     print(phone_number)
      file_buffer.close()
      os.system('sh /home/pi/Desktop/Licenta_latest/Licenta_senzori/send_message.sh {} {}'.format(phone_number, content))
 

@@ -1,5 +1,7 @@
 from django.db import models
 from .rfid import *
+from django.core.validators import MinLengthValidator
+
 
 # Create your models here.
 
