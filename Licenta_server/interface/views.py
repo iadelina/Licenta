@@ -16,9 +16,7 @@ from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 import RPi.GPIO as GPIO
 
-#GPIO.setmode(GPIO.BOARD)
 GPIO.cleanup()
-#led_object = IndoorLed(35, 'BOARD')
 
 @login_required
 def render_info_page(request):
@@ -29,6 +27,7 @@ def render_info_page(request):
     GPIO.cleanup() 
     #temperature = read_temperature.delay()
     #temperature = 3
+    #queryset = RFIDKeysModel.objects.create(key='1088853604795')
     return render(request, 'registration/info.html', {'datetime_object': request.user.last_login, 'temperature': temperature})
 
 @login_required
@@ -85,6 +84,7 @@ def power_off_led(request):
 @login_required
 def add_new_key(request):
     queryset = RFIDKeysModel.objects.all()
+    #queryset.delete()
     if request.method == 'POST':
         form = AddRFIDKeysForm(request.POST)
         if form.is_valid():
@@ -94,7 +94,6 @@ def add_new_key(request):
             #queryset = queryset.filter(Q(id__gt=0))
     else:
         key = rfid_scan()
-        #print(key)
         if key == 'ini':
             messages.info(request,'Cheia exista deja!')
             form = AddRFIDKeysForm(initial={'key': ' '})

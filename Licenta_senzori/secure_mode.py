@@ -39,7 +39,7 @@ while True:
                 time.sleep(0.5)
                 GPIO.output(BUZZ, GPIO.HIGH)
                 print('inainte trigger')
-                trigger_message('Alerta!')
+                trigger_message('Alerta hoti!')
                 start = time.time()
                 counter = 1
     else:

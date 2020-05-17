@@ -1,3 +1,5 @@
+
+
 def write_in_file(key, file):
     import sys
     import os
@@ -28,7 +30,6 @@ def disable_rfid_forever():
 
 def rfid_scan():
     import RPi.GPIO as GPIO
-    from time import sleep
     import sys
     import os
     from mfrc522 import SimpleMFRC522
